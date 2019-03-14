@@ -30,11 +30,11 @@ in the libstdc++ manual for more details.
 
 The latest snapshot is:
 
-    GCC 9-20190310 Snapshot
+      GCC 9-20190310 Snapshot
 
-    This snapshot has been generated from the GCC 9 SVN branch
-    with the following options:
-    svn://gcc.gnu.org/svn/gcc/trunk revision 269561
+      This snapshot has been generated from the GCC 9 SVN branch
+      with the following options:
+      svn://gcc.gnu.org/svn/gcc/trunk revision 269561
 
 Packages for Fedora, RHEL, CentOS, and openSUSE
 are built and hosted in the
