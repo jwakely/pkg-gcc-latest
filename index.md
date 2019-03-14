@@ -15,7 +15,7 @@ If you find bugs in GCC itself please report them to
 [GCC Bugzilla](https://gcc.gnu.org/bugs)
 but for problems with how these packages are built
 please use the
-[GitHub issues tracker](https://github/com/jwakely/pkg-gcc-latest/issues).
+[GitHub issues tracker](https://github.com/jwakely/pkg-gcc-latest/issues).
 
 You need to be aware that binaries created by this snapshot compiler
 will not know how to find the `libstdc++.so.6` shared library by default.
