@@ -107,5 +107,6 @@ case $2 in
     build_copr
     ;;
   deb)
-    gen_deb ;;
+    gen_deb
+    ;;
 esac
