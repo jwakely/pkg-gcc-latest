@@ -17,6 +17,17 @@ but for problems with how these packages are built
 please use the
 <a href="https://github/com/jwakely/pkg-gcc-latest/issues">GitHub issues tracker</a>.</p>
 
+<p>You need to be aware that binaries created by this snapshot compiler
+will not know how to find the <code>libstdc++.so.6</code> shared library by default.
+This is because these packages install libraries to <code>/opt/gcc-latest/lib64</code>
+and <a href="http://man7.org/linux/man-pages/man8/ld.so.8.html"><code>ld.so</code></a>
+doesn&rsquo;t search in that directory by default.
+This can be solved by using <code>LD_RUN_PATH</code> or <code>-Wl,-rpath</code> (when linking),
+or <code>LD_LIBRARY_PATH</code> (when running the executables),
+or by creating static binaries that don&rsquo;t use <code>libstdc++.so.6</code> at all.
+See the <a href="https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dynamic_or_shared.html#manual.intro.using.linkage.dynamic">libstdc++ documentation</a>
+for more detail.</p>
+
 <p>The latest snapshot is:</p>
 
 <pre><code>GCC 9-20190310 Snapshot
