@@ -25,8 +25,8 @@ doesn't search in that directory by default.
 This can be solved by using `LD_RUN_PATH` or `-Wl,-rpath` (when linking),
 or `LD_LIBRARY_PATH` (when running the executables),
 or by creating static binaries that don't use `libstdc++.so.6` at all.
-See the [libstdc++ documentation](https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dynamic_or_shared.html#manual.intro.using.linkage.dynamic)
-for more detail.
+See [Finding Dynamic or Shared Libraries](https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dynamic_or_shared.html#manual.intro.using.linkage.dynamic)
+in the libstdc++ manual for more details.
 
 The latest snapshot is:
 
@@ -38,7 +38,7 @@ The latest snapshot is:
 
 Packages for Fedora, RHEL, CentOS, and openSUSE
 are built and hosted in the
-[jwakely/gcc-latest COPR](https://copr.fedorainfracloud.org/coprs/jwakely/gcc-latest/)
+[jwakely/gcc-latest COPR](https://copr.fedorainfracloud.org/coprs/jwakely/gcc-latest/).
 
 A package for Ubuntu 16.04 is hosted on my personal site (until I set up Git Large File Storage on GitHub):
 
