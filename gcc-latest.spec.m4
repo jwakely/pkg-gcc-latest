@@ -17,8 +17,7 @@ Source0:	SOURCE_URL
 
 BuildRequires:	gcc, gcc-c++
 BuildRequires:	binutils >= 2.24
-BuildRequires:	glibc-static
-BuildRequires:	zlib-devel, gettext, dejagnu, bison, flex, sharutils
+BuildRequires:	zlib-devel, gettext, dejagnu, bison, flex
 BuildRequires:	systemtap-sdt-devel >= 1.3
 BuildRequires:	glibc-devel >= 2.17
 %if 0%{?fedora} || 0%{?rhel}
@@ -32,8 +31,6 @@ BuildRequires:	libelf-devel >= 0.147
 %endif
 Requires:	binutils >= 2.24
 Requires:	glibc >= 2.17
-Requires:	libgcc >= %{version}-%{release}
-Requires:	libgomp = %{version}-%{release}
 
 Provides:	bundled(libiberty)
 
