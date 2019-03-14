@@ -3,8 +3,19 @@
 <p>This page links to binary packages
 built from recent <a href="https://gcc.gnu.org/snapshots.html">snapshots</a>
 of GCC&rsquo;s development trunk.
-These builds are an experiment and might not get updated
+These builds are provided for testing purposes,
+but are an experiment and might not get updated
 and might even get taken down.</p>
+
+<p>Only the C and C++ compilers are included, in a single large package.
+I don&rsquo;t intend to split them up into smaller packages,
+because the aim is just to provide a testable compiler.</p>
+
+<p>If you find bugs in GCC itself please report them to
+<a href="https://gcc.gnu.org/bugs">GCC Bugzilla</a>
+but for problems with how these packages are built
+please use the
+<a href="https://github/com/jwakely/pkg-gcc-latest/issues">GitHub issues tracker</a>.</p>
 
 <p>The latest snapshot is:</p>
 
@@ -26,4 +37,10 @@ are built and hosted in the
 </ul>
 
 
-<p>The script to create these packages is on <a href="https://github.com/jwakely/pkg-gcc-latest">GitHub</a>.</p>
+<p>The sources for these packages can be found in the Subversion repository
+(at the revision number above) or in the corresponding directory at
+<a href="https://gcc.gnu.org/pub/gcc/snapshots/">https://gcc.gnu.org/pub/gcc/snapshots/</a></p>
+
+<p>The script to create these packages
+is on <a href="https://github.com/jwakely/pkg-gcc-latest">GitHub</a>
+(along with any patches applied to the upstream sources).</p>
