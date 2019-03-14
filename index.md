@@ -23,7 +23,7 @@ please use the
 
 You need to be aware that binaries created by this snapshot compiler
 will not know how to find the `libstdc++.so.6` shared library by default.
-This will result in errors complaining about `GLIBCXX_3.4.26` not being found.
+This can result in errors complaining about `GLIBCXX_3.4.26` not being found.
 This is because these packages install libraries to `/opt/gcc-latest/lib64`
 and [`ld.so`](http://man7.org/linux/man-pages/man8/ld.so.8.html)
 doesn't search in that directory by default.
