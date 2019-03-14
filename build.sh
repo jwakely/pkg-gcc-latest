@@ -3,7 +3,7 @@
 
 usage()
 {
-  echo "Usage: $0 <snapshot> <rpm|deb>"
+  echo "Usage: $0 <snapshot> <spec|srpm|rpm|deb>"
   echo 'The snapshot argument should be a version and date (e.g. 9-20190310)'
   echo 'or a symbolic name (e.g. LATEST-9).'
 }
@@ -67,13 +67,8 @@ basename=${tarfile%%.*}
 BASE_VER=`tar -Oxf $tarfile $basename/gcc/BASE-VER`
 DATE=${basename##*-}
 
-if [[ $2 == rpm ]]
-then
-  gen_spec
-  build_srpm
-  build_copr
-elif [[ $2 == deb ]]
-then
+gen_deb()
+{
   m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}svn${REV}  control.m4 > control
   PKGNAME=gcc-latest_$BASE_VER-${DATE}svn${REV}
   echo '### Initializing container'
@@ -99,4 +94,18 @@ then
   podman cp cont:/tmp/$PKGNAME.deb .
   podman rm cont
   buildah rmi $container-img
-fi
+}
+
+case $2 in
+  spec | srpm | rpm)
+    gen_spec
+    ;;&
+  srpm | rpm)
+    build_srpm
+    ;;&
+  rpm)
+    build_copr
+    ;;
+  deb)
+    gen_deb ;;
+esac
