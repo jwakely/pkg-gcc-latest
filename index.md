@@ -29,7 +29,8 @@ and [`ld.so`](http://man7.org/linux/man-pages/man8/ld.so.8.html)
 doesn't search in that directory by default.
 This can be solved by using `LD_RUN_PATH` or `-Wl,-rpath` (when linking),
 or `LD_LIBRARY_PATH` (when running the executables),
-or by creating static binaries that don't use `libstdc++.so.6` at all.
+or by using `-static` to create static binaries that don't depend on
+`libstdc++.so.6` at all.
 See [Finding Dynamic or Shared Libraries](https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dynamic_or_shared.html#manual.intro.using.linkage.dynamic)
 in the libstdc++ manual for more details.
 

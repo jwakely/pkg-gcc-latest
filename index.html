@@ -29,7 +29,8 @@ and <a href="http://man7.org/linux/man-pages/man8/ld.so.8.html"><code>ld.so</cod
 doesn&rsquo;t search in that directory by default.
 This can be solved by using <code>LD_RUN_PATH</code> or <code>-Wl,-rpath</code> (when linking),
 or <code>LD_LIBRARY_PATH</code> (when running the executables),
-or by creating static binaries that don&rsquo;t use <code>libstdc++.so.6</code> at all.
+or by using <code>-static</code> to create static binaries that don&rsquo;t depend on
+<code>libstdc++.so.6</code> at all.
 See <a href="https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dynamic_or_shared.html#manual.intro.using.linkage.dynamic">Finding Dynamic or Shared Libraries</a>
 in the libstdc++ manual for more details.</p>
 
