@@ -44,12 +44,12 @@ The latest snapshot is:
       with the following options:
       svn://gcc.gnu.org/svn/gcc/trunk revision 269561
 
-Packages for Fedora, RHEL, CentOS, and openSUSE
+RPM packages for **Fedora, RHEL, CentOS, and openSUSE**
 are built and hosted in the
 [jwakely/gcc-latest COPR](https://copr.fedorainfracloud.org/coprs/jwakely/gcc-latest/).
 
-A package for Ubuntu 16.04 is hosted on my personal site
-(because GitHub won't host large binaries in the repo that hosts this page):
+A `.deb` package for **Ubuntu 16.04** is hosted on my personal site
+(because large binaries can't be stored in a GitHub repo):
 
 - [gcc-latest_9.0.1-20190310svn269561.deb](http://kayari.org/gcc-latest_9.0.1-20190310svn269561.deb)
 
