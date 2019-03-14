@@ -43,7 +43,7 @@ Patch0:	gcc8-Wno-format-security.patch
 GNU C and C++ compilers built from a weekly development snapshot.
 
 %prep
-%setup -q -n %(basename --suffix=.tar.xz %{Source0})
+%setup -q -n BASENAME
 %patch0 -p0 -b .Wno-format-security~
 
 
