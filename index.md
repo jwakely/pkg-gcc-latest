@@ -18,6 +18,8 @@ Packages for Fedora, RHEL, CentOS, and openSUSE
 are built and hosted in the
 [jwakely/gcc-latest COPR](https://copr.fedorainfracloud.org/coprs/jwakely/gcc-latest/)
 
-A package for Ubuntu 16.04 is hosted here:
+A package for Ubuntu 16.04 is hosted on my personal site (until I set up Git Large File Storage on GitHub):
 
 - [gcc-latest_9.0.1-20190310svn269561.deb](http://kayari.org/gcc-latest_9.0.1-20190310svn269561.deb)
+
+The script to create these packages is on [GitHub](https://github.com/jwakely/pkg-gcc-latest).
