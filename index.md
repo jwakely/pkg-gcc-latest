@@ -19,7 +19,23 @@ but for problems with how these packages are built
 please use the
 [GitHub issues tracker](https://github.com/jwakely/pkg-gcc-latest/issues).
 
-## Dynamic linking
+## Caveats
+
+### Experimental and potentially unstable
+
+These packages are provided to make it easier for people to try out
+the latest GCC code (e.g. in Travis CI) but are not supported,
+neither by the GCC project nor by me.
+Please test your code with them and provide feedback
+(e.g. if you have valid code that no longer compiles,
+or runs slower, or faster!)
+but don't rely on these packages for your production builds.
+
+For serious purposes you should use supported packages
+provided by your linux distribution vendor,
+or make your own builds of GCC and support them yourself.
+
+### Dynamic linking
 
 You need to be aware that binaries created by this snapshot compiler
 will not know how to find the `libstdc++.so.6` shared library by default.
@@ -33,6 +49,14 @@ or by using `-static` to create static binaries that don't depend on
 `libstdc++.so.6` at all.
 See [Finding Dynamic or Shared Libraries](https://gcc.gnu.org/onlinedocs/libstdc++/manual/using_dynamic_or_shared.html#manual.intro.using.linkage.dynamic)
 in the libstdc++ manual for more details.
+
+### Checking enabled
+
+GCC pre-release snapshots have lots of additional checking enabled
+in the compiler, which slows the compiler down considerably.
+Please do not report problems with slow compile times using these packages,
+unless you're comparing apples to apples
+(e.g. comparing to another pre-release build with checking enabled).
 
 ## Packages
 
