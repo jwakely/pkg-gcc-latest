@@ -1,6 +1,6 @@
 # Binary packages for GCC snapshots
 
-This page links to binary packages
+This page links to binary packages for some popular GNU/Linux distributions,
 built from recent [snapshots](https://gcc.gnu.org/snapshots.html)
 of GCC's development trunk.
 These builds are provided for testing purposes,
