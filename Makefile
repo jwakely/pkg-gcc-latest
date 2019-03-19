@@ -10,3 +10,5 @@ index.html: index.html.m4 index.md Makefile
 		-DMAJOR=$(MAJOR) -DDATE=$(DATE) -DSVNREV=$(SVNREV) \
 		-DDEB=gcc-latest_$(BASE_VER)-$(DATE)svn$(SVNREV).deb \
 		index.html.m4 > $@
+
+-include upload.mk
