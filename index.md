@@ -1,6 +1,7 @@
 # Binary packages for GCC snapshots
 
 changequote(`[[[',`]]]')dnl
+<img src="https://gcc.gnu.org/img/gccegg-65.png" alt="GCC logo" style="float:right; margin-left:10px"/>
 
 This page links to binary packages for some popular GNU/Linux distributions,
 built from recent [snapshots](https://gcc.gnu.org/snapshots.html)
