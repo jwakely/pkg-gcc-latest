@@ -26,7 +26,7 @@ please use the
 ### Experimental and potentially unstable
 
 These packages are provided to make it easier for people to try out
-the latest GCC code (e.g. in Travis CI) but are not supported,
+the latest GCC code (e.g. in [Travis CI](#travis)) but are not supported,
 neither by the GCC project nor by me.
 Please test your code with them and provide feedback
 (e.g. if you have valid code that no longer compiles,
@@ -36,6 +36,7 @@ but don't rely on these packages for your production builds.
 For serious purposes you should use supported packages
 provided by your linux distribution vendor,
 or make your own builds of GCC and support them yourself.
+
 
 ### Dynamic linking
 
@@ -77,7 +78,13 @@ are built and hosted in the
 A `.deb` package for **Ubuntu 16.04** is hosted on my personal site
 (because large binaries can't be stored in a GitHub repo):
 
-- [DEB](http://kayari.org/gcc-latest/gcc-latest.deb)
+- [DEB](http://kayari.org/gcc-latest/DEB)
+
+The unversioned URL [http://kayari.org/gcc-latest/gcc-latest.deb](http://kayari.org/gcc-latest/gcc-latest.deb)
+can be used in scripts and will redirect to the latest `.deb` file.
+To download from the unversioned URL but use the real filename use:
+
+      wget --content-disposition http://kayari.org/gcc-latest/gcc-latest.deb
 
 ## Source code
 
@@ -88,3 +95,33 @@ The sources for these packages can be found in the Subversion repository
 The script to create these packages
 is on [GitHub](https://github.com/jwakely/pkg-gcc-latest)
 (along with any patches applied to the upstream sources).
+
+## Travis CI integration
+<a id="travis">
+
+To use these packages with
+[Travis CI on GitHub](https://docs.travis-ci.com/user/tutorial/)
+you can download and install the `gcc-latest.deb` package
+in the `install` phase.
+
+A simple `.travis.yml` file using this package might look like:
+
+        language: cpp
+        os: linux
+        dist: xenial
+
+        install:
+        - |
+          wget http://kayari.org/gcc-latest/gcc-latest.deb
+          sudo dpkg -i gcc-latest.deb
+          sudo ln -s /opt/gcc-latest/bin/gcc /usr/bin/gcc-latest
+          sudo ln -s /opt/gcc-latest/bin/g++ /usr/bin/g++-latest
+          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-latest 90 --slave /usr/bin/g++ g++ /usr/bin/g++-latest
+          sudo ldconfig /opt/gcc-latest/lib64
+
+        script:
+        - |
+          ./configure
+          make
+          make check
+
