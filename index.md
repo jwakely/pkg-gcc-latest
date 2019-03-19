@@ -1,5 +1,7 @@
 # Binary packages for GCC snapshots
 
+changequote(`[[[',`]]]')dnl
+
 This page links to binary packages for some popular GNU/Linux distributions,
 built from recent [snapshots](https://gcc.gnu.org/snapshots.html)
 of GCC's development trunk.
@@ -62,11 +64,11 @@ unless you're comparing apples to apples
 
 The latest snapshot is:
 
-      GCC 9-20190310 Snapshot
+      GCC MAJOR-DATE Snapshot
 
-      This snapshot has been generated from the GCC 9 SVN branch
+      This snapshot has been generated from the GCC MAJOR SVN branch
       with the following options:
-      svn://gcc.gnu.org/svn/gcc/trunk revision 269561
+      svn://gcc.gnu.org/svn/gcc/trunk revision SVNREV
 
 RPM packages for **Fedora, RHEL, CentOS, and openSUSE**
 are built and hosted in the
@@ -75,7 +77,7 @@ are built and hosted in the
 A `.deb` package for **Ubuntu 16.04** is hosted on my personal site
 (because large binaries can't be stored in a GitHub repo):
 
-- [gcc-latest_9.0.1-20190310svn269561.deb](http://kayari.org/gcc-latest_9.0.1-20190310svn269561.deb)
+- [DEB](http://kayari.org/gcc-latest/gcc-latest.deb)
 
 ## Source code
 
