@@ -113,12 +113,10 @@ A simple `.travis.yml` file using this package might look like:
 
         install:
         - |
-          wget http://kayari.org/gcc-latest/gcc-latest.deb
-          sudo dpkg -i gcc-latest.deb
-          sudo ln -s /opt/gcc-latest/bin/gcc /usr/bin/gcc-latest
-          sudo ln -s /opt/gcc-latest/bin/g++ /usr/bin/g++-latest
-          sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-latest 90 --slave /usr/bin/g++ g++ /usr/bin/g++-latest
-          sudo ldconfig /opt/gcc-latest/lib64
+          wget http://kayari.org/gcc-latest/gcc-latest.deb \
+          && sudo dpkg -i gcc-latest.deb
+          export PATH=/opt/gcc-latest/bin:$PATH
+          export LD_RUN_PATH=/opt/gcc-latest/lib64
 
         script:
         - |
