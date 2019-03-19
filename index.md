@@ -9,7 +9,8 @@ These builds are provided for testing purposes,
 but are an experiment and might not get updated
 and might even get taken down.
 
-Only the C and C++ compilers are included, in a single large package.
+Only the C and C++ compilers are included, and only for x86_64,
+in a single large package.
 I don't intend to split them up into smaller packages,
 because the aim is just to provide a testable compiler.
 
