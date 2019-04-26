@@ -63,7 +63,7 @@ build_copr()
 
 fetch_tarfile $1
 echo '### Extracting version from sources'
-basename=${tarfile%%.*}
+basename=${tarfile%.tar.*}
 BASE_VER=`tar -Oxf $tarfile $basename/gcc/BASE-VER`
 DATE=${basename##*-}
 
