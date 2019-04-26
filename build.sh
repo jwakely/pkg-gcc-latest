@@ -27,10 +27,10 @@ url=https://gcc.gnu.org/pub/gcc/snapshots/$1
 
 fetch_tarfile()
 {
-  w3m -dump $url/index.html > index.txt
-  cat index.txt
-  REV=`awk '/trunk revision/ { print $NF }' index.txt`
-  tarfile=`awk '/^gcc-.*tar/ { print $1 }' index.txt`
+  # w3m -dump $url/index.html > index.txt
+  # cat index.txt
+  REV=270601 # `awk '/trunk revision/ { print $NF }' index.txt`
+  tarfile=gcc-9.0.1-RC-20190426.tar.xz # `awk '/^gcc-.*tar/ { print $1 }' index.txt`
   if ! test -f $tarfile
   then
     echo '### Downloading source tarball'
@@ -65,7 +65,7 @@ fetch_tarfile $1
 echo '### Extracting version from sources'
 basename=${tarfile%.tar.*}
 BASE_VER=`tar -Oxf $tarfile $basename/gcc/BASE-VER`
-DATE=${basename##*-}
+DATE=RC-${basename##*-}
 
 gen_deb()
 {
