@@ -30,7 +30,7 @@ fetch_tarfile()
   # w3m -dump $url/index.html > index.txt
   # cat index.txt
   REV=270601 # `awk '/trunk revision/ { print $NF }' index.txt`
-  tarfile=gcc-9.0.1-RC-20190426.tar.xz # `awk '/^gcc-.*tar/ { print $1 }' index.txt`
+  tarfile=gcc-$1.tar.xz # `awk '/^gcc-.*tar/ { print $1 }' index.txt`
   if ! test -f $tarfile
   then
     echo '### Downloading source tarball'
@@ -43,7 +43,7 @@ fetch_tarfile()
 gen_spec()
 {
   echo '### Generating RPM spec file'
-  m4 -P -DVERSION=$BASE_VER -DPKGREL=1 -DSNAPINFO=${DATE}svn${REV} -DSOURCE_URL=https://gcc.gnu.org/pub/gcc/snapshots/${basename#gcc-}/$tarfile -DBASENAME=$basename gcc-latest.spec.m4 > gcc-latest.spec
+  m4 -P -DVERSION=$BASE_VER -DPKGREL=1 -DSNAPINFO=${DATE#RC-}svn${REV} -DSOURCE_URL=https://gcc.gnu.org/pub/gcc/snapshots/${basename#gcc-}/$tarfile -DBASENAME=$basename gcc-latest.spec.m4 > gcc-latest.spec
 }
 
 build_srpm()
