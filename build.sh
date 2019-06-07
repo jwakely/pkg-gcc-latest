@@ -69,33 +69,17 @@ DATE=${basename##*-}
 
 gen_deb()
 {
-  rm -r context
   mkdir context
   ln $tarfile context/$tarfile
   m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}svn${REV}  control.m4 > context/control
-  PKGNAME=gcc-latest_$BASE_VER-${DATE}svn${REV}
-  cat > context/Dockerfile <<-EOT
-	FROM ubuntu:16.04
-	RUN apt-get update
-	RUN apt-get -y install build-essential curl file flex bison libz-dev
-	COPY $tarfile /tmp
-	RUN tar -xf /tmp/$tarfile -C /tmp
-	RUN mkdir -p /tmp/$PKGNAME/DEBIAN
-	COPY control /tmp/$PKGNAME/DEBIAN
-	RUN bash -c "cd /tmp/$basename && ./contrib/download_prerequisites"
-	RUN mkdir -p /tmp/$basename/objdir
-	RUN bash -c "cd /tmp/$basename/objdir && ../configure --prefix=/opt/gcc-latest --enable-languages=c,c++ --enable-libstdcxx-debug --disable-bootstrap --disable-multilib --disable-libvtv --with-system-zlib --without-isl --enable-multiarch"
-	RUN make -C /tmp/$basename/objdir -j8
-	RUN make -C /tmp/$basename/objdir install DESTDIR=/tmp/$PKGNAME
-	RUN bash -c "cd /tmp && dpkg-deb --build $PKGNAME"
-EOT
-
+  m4 -P -DPKGNAME=gcc-latest_$BASE_VER-${DATE}svn${REV} -DTARFILE=$tarfile -DBASENAME=$basename Dockerfile.m4 > context/Dockerfile
   echo '### Initializing container'
   podman build -t image context
   podman create --name cont image
   podman cp cont:/tmp/$PKGNAME.deb .
   podman rm cont
   podman rmi image
+  rm -r context
 }
 
 case $2 in
