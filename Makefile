@@ -1,4 +1,4 @@
-BASE_VER := 9.0.1
+BASE_VER := 10.0.0
 
 MAJOR := $(basename $(basename $(BASE_VER)))
 DEB := gcc-latest_$(BASE_VER)-$(DATE)svn$(SVNREV).deb
