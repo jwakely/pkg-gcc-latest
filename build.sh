@@ -69,31 +69,33 @@ DATE=${basename##*-}
 
 gen_deb()
 {
-  m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}svn${REV}  control.m4 > control
+  rm -r context
+  mkdir context
+  ln $tarfile context/$tarfile
+  m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}svn${REV}  control.m4 > context/control
   PKGNAME=gcc-latest_$BASE_VER-${DATE}svn${REV}
+  cat > context/Dockerfile <<-EOT
+	FROM ubuntu:16.04
+	RUN apt-get update
+	RUN apt-get -y install build-essential curl file flex bison libz-dev
+	COPY $tarfile /tmp
+	RUN tar -xf /tmp/$tarfile -C /tmp
+	RUN mkdir -p /tmp/$PKGNAME/DEBIAN
+	COPY control /tmp/$PKGNAME/DEBIAN
+	RUN bash -c "cd /tmp/$basename && ./contrib/download_prerequisites"
+	RUN mkdir -p /tmp/$basename/objdir
+	RUN bash -c "cd /tmp/$basename/objdir && ../configure --prefix=/opt/gcc-latest --enable-languages=c,c++ --enable-libstdcxx-debug --disable-bootstrap --disable-multilib --disable-libvtv --with-system-zlib --without-isl --enable-multiarch"
+	RUN make -C /tmp/$basename/objdir -j8
+	RUN make -C /tmp/$basename/objdir install DESTDIR=/tmp/$PKGNAME
+	RUN bash -c "cd /tmp && dpkg-deb --build $PKGNAME"
+EOT
+
   echo '### Initializing container'
-  container=ubuntu-gcc-builder
-  # Apparently I'm using buildah inappropriately and should use podman instead,
-  # but I tried that and encountered various limitations or bugs like
-  # https://bugzilla.redhat.com/show_bug.cgi?id=1688562 so I'm using buildah.
-  buildah from --name $container ubuntu:16.04
-  buildah run --net host $container apt-get update
-  buildah run --net host $container apt-get -y install build-essential curl file flex bison libz-dev
-  buildah copy $container $tarfile /tmp
-  buildah run $container tar -xf /tmp/$tarfile -C /tmp
-  buildah run $container mkdir -p /tmp/$PKGNAME/DEBIAN
-  buildah copy $container control /tmp/$PKGNAME/DEBIAN
-  buildah run --net host $container bash -c "cd /tmp/$basename && ./contrib/download_prerequisites"
-  buildah run $container mkdir -p /tmp/$basename/objdir
-  buildah run $container bash -c "cd /tmp/$basename/objdir && ../configure --prefix=/opt/gcc-latest --enable-languages=c,c++ --enable-libstdcxx-debug --disable-bootstrap --disable-multilib --disable-libvtv --with-system-zlib --without-isl --enable-multiarch"
-  buildah run $container make -C /tmp/$basename/objdir -j8
-  buildah run $container make -C /tmp/$basename/objdir install DESTDIR=/tmp/$PKGNAME
-  buildah run $container bash -c "cd /tmp && dpkg-deb --build $PKGNAME"
-  buildah commit --rm $container $container-img
-  podman create --name cont $container-img
+  podman build -t image context
+  podman create --name cont image
   podman cp cont:/tmp/$PKGNAME.deb .
   podman rm cont
-  buildah rmi $container-img
+  podman rmi image
 }
 
 case $2 in
