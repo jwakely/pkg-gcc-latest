@@ -69,10 +69,11 @@ DATE=${basename##*-}
 
 gen_deb()
 {
+  PKGNAME=gcc-latest_$BASE_VER-${DATE}svn${REV}
   mkdir context
   ln $tarfile context/$tarfile
   m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}svn${REV}  control.m4 > context/control
-  m4 -P -DPKGNAME=gcc-latest_$BASE_VER-${DATE}svn${REV} -DTARFILE=$tarfile -DBASENAME=$basename Dockerfile.m4 > context/Dockerfile
+  m4 -P -DPKGNAME=$PKGNAME -DTARFILE=$tarfile -DBASENAME=$basename Dockerfile.m4 > context/Dockerfile
   echo '### Initializing container'
   podman build -t image context
   podman create --name cont image
