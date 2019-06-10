@@ -34,14 +34,12 @@ Requires:	glibc >= 2.17
 
 Provides:	bundled(libiberty)
 
-Patch0:	gcc8-Wno-format-security.patch
 
 %description
 GNU C and C++ compilers built from a weekly development snapshot.
 
 %prep
 %setup -q -n BASENAME
-%patch0 -p0 -b .Wno-format-security~
 
 
 %build
@@ -77,5 +75,8 @@ cd objdir
 
 
 %changelog
+* Mon Jun 10 2019 Jonathan Wakely <jwakely@redhat.com> - 10.0.0-1
+- Removed patch
+
 * Wed Mar 13 2019 Jonathan Wakely <jwakely@redhat.com> - 9.0.1-1
 - Created spec file template for COPR builds
