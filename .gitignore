@@ -2,7 +2,6 @@ upload.mk
 .htaccess
 gcc-*-????????.tar.*
 gcc-latest_*.deb
-control
 gcc-latest.spec
 index.txt
 sha512.sum
