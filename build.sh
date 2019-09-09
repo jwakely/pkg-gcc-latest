@@ -58,7 +58,7 @@ build_srpm()
 build_copr()
 {
   echo '### Starting COPR build'
-  copr build gcc-latest $srpm
+  copr build --nowait gcc-latest $srpm
 }
 
 fetch_tarfile $1
