@@ -29,7 +29,7 @@ fetch_tarfile()
 {
   w3m -dump $url/index.html > index.txt
   cat index.txt
-  REV=`awk '/trunk revision/ { print $NF }' index.txt`
+  REV=`awk '/master revision/ { getline ; print substr($1, 1, 12) }' index.txt`
   tarfile=`awk '/^gcc-.*tar/ { print $1 }' index.txt`
   if ! test -f $tarfile
   then
@@ -43,7 +43,7 @@ fetch_tarfile()
 gen_spec()
 {
   echo '### Generating RPM spec file'
-  m4 -P -DVERSION=$BASE_VER -DPKGREL=1 -DSNAPINFO=${DATE}svn${REV} -DSOURCE_URL=https://gcc.gnu.org/pub/gcc/snapshots/${basename#gcc-}/$tarfile -DBASENAME=$basename gcc-latest.spec.m4 > gcc-latest.spec
+  m4 -P -DVERSION=$BASE_VER -DPKGREL=1 -DSNAPINFO=${DATE}git${REV} -DSOURCE_URL=https://gcc.gnu.org/pub/gcc/snapshots/${basename#gcc-}/$tarfile -DBASENAME=$basename gcc-latest.spec.m4 > gcc-latest.spec
 }
 
 build_srpm()
@@ -69,10 +69,10 @@ DATE=${basename##*-}
 
 gen_deb()
 {
-  PKGNAME=gcc-latest_$BASE_VER-${DATE}svn${REV}
+  PKGNAME=gcc-latest_$BASE_VER-${DATE}git${REV}
   mkdir context
   ln $tarfile context/$tarfile
-  m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}svn${REV}  control.m4 > context/control
+  m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}git${REV}  control.m4 > context/control
   m4 -P -DPKGNAME=$PKGNAME -DTARFILE=$tarfile -DBASENAME=$basename Dockerfile.m4 > context/Dockerfile
   echo '### Initializing container'
   podman build -t image context
