@@ -69,9 +69,9 @@ The latest snapshot is:
 
       GCC MAJOR-DATE Snapshot
 
-      This snapshot has been generated from the GCC MAJOR SVN branch
+      This snapshot has been generated from the GCC MAJOR git branch
       with the following options:
-      svn://gcc.gnu.org/svn/gcc/trunk revision SVNREV
+      git://gcc.gnu.org/git/gcc.git branch master revision GITREV
 
 RPM packages for **Fedora, RHEL, CentOS, and openSUSE**
 are built and hosted in the
