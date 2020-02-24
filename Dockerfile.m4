@@ -3,7 +3,7 @@ RUN apt-get update
 RUN apt-get -y install build-essential curl file flex bison libz-dev
 COPY TARFILE /tmp
 RUN tar -xf /tmp/TARFILE -C /tmp
-RUN mkdir -p /tmp/PKGNAME/DEBIAN
+RUN mkdir -p -m 0755 /tmp/PKGNAME/DEBIAN
 COPY control /tmp/PKGNAME/DEBIAN
 RUN bash -c "cd /tmp/BASENAME && ./contrib/download_prerequisites"
 RUN mkdir -p /tmp/BASENAME/objdir
