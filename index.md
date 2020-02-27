@@ -90,8 +90,8 @@ To download from the unversioned URL but use the real filename use:
 
 ## Source code
 
-The sources for these packages can be found in the Subversion repository
-(at the revision number above) or in the corresponding directory at
+The sources for these packages can be found in the Git repository
+(at the revision above) or in the corresponding directory at
 [https://gcc.gnu.org/pub/gcc/snapshots/](https://gcc.gnu.org/pub/gcc/snapshots/)
 
 The script to create these packages
