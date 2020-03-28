@@ -19,7 +19,12 @@ index.html.tmp: index.html.m4 index.md Makefile $(DEB)
 		-DDEB=$(DEB) \
 		index.html.m4 > $@
 
-.PHONY: guess-version
+gcc-latest_$(BASE_VER)-git.deb:
+	@echo "Variables DATE and GITREV are not set" >&2
+	@echo "Use 'make guess-version' to guess them from the latest .deb" >&2
+	@false
+
+.PHONY: guess-version gcc-latest_-git.deb
 .INTERMEDIATE: index.html.tmp
 
 -include upload.mk
