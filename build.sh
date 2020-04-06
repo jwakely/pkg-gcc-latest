@@ -59,6 +59,7 @@ build_copr()
 {
   echo '### Starting COPR build'
   copr build --nowait gcc-latest $srpm
+  echo "Built $srpm"
 }
 
 fetch_tarfile $1
@@ -81,6 +82,7 @@ gen_deb()
   podman rm cont
   podman rmi image
   rm -r context
+  echo "Built $PKGNAME.deb"
 }
 
 case $2 in
