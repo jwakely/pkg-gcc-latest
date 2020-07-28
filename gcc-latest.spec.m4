@@ -1,5 +1,11 @@
 %global install_prefix /opt/gcc-latest
 
+# Do not check .so files in an application-specific library directory
+# or any files in the application's data directory for provides
+%global __provides_exclude_from ^%{install_prefix}/%{_lib}/
+# Do not generate auto-requires for symlinks to libs in this package.
+%global __requires_exclude ^lib(c[cp]1plugin|lto_plugin|atomic|cc1|gomp|itm|quadmath|(a|l|t|ub)san).so.?\\(\\)\\(.*\\)$
+
 # Hardening slows the compiler way too much.
 %undefine _hardened_build
 # Until annobin is fixed (#1519165).
@@ -57,7 +63,8 @@ cd objdir
 CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" CXXFLAGS="$OPT_FLAGS" \
   ../configure --prefix=%{install_prefix} --enable-languages=c,c++ \
   --enable-libstdcxx-debug \
-  --disable-bootstrap --disable-multilib --disable-libvtv \
+  --disable-bootstrap --disable-multilib \
+  --disable-libvtv --disable-libssp --disable-libffi \
   --with-system-zlib --without-isl \
   --with-bugurl=https://gcc.gnu.org/bugzilla
 
@@ -75,6 +82,9 @@ cd objdir
 
 
 %changelog
+* Tue Jul 28 2020 Jonathan Wakely <jwakely@redhat.com> - 11.0.0-1
+- Exclude shared libraries from autodep processing
+
 * Mon Jun 10 2019 Jonathan Wakely <jwakely@redhat.com> - 10.0.0-1
 - Removed patch
 
