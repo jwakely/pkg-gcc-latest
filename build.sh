@@ -98,4 +98,8 @@ case $2 in
   deb)
     gen_deb
     ;;
+  *)
+    echo "$0: Unknown build target: $2" >&2
+    exit 1
+    ;;
 esac
