@@ -58,7 +58,7 @@ build_srpm()
 build_copr()
 {
   echo '### Starting COPR build'
-  copr build --nowait gcc-latest $srpm
+  copr build -r fedora-33-x86_64 -r fedora-rawhide-x86_64 --nowait gcc-latest $srpm
   echo "Built $srpm"
 }
 

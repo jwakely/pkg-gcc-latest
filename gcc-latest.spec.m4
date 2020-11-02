@@ -51,13 +51,25 @@ GNU C and C++ compilers built from a weekly development snapshot.
 %build
 CC=gcc
 CXX=g++
-m4_changequote({,})
+m4_changequote({{,}})
 OPT_FLAGS=`echo %{optflags}|sed -e 's/\(-Wp,\)\?-D_FORTIFY_SOURCE=[12]//g'`
+OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/-flto=auto//g;s/-flto//g;s/-ffat-lto-objects//g'`
 OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/-m64//g;s/-m32//g;s/-m31//g'`
 OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/-mfpmath=sse/-mfpmath=sse -msse2/g'`
 OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/ -pipe / /g'`
 OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/-Werror=format-security/-Wformat-security/g'`
-m4_changequote(`,')
+%ifarch %{ix86}
+OPT_FLAGS=`echo $OPT_FLAGS|sed -e 's/-march=i.86//g'`
+%endif
+OPT_FLAGS=`echo "$OPT_FLAGS" | sed -e 's/[[:blank:]]\+/ /g'`
+case "$OPT_FLAGS" in
+  *-fasynchronous-unwind-tables*)
+    sed -i -e 's/-fno-exceptions /-fno-exceptions -fno-asynchronous-unwind-tables /' \
+      libgcc/Makefile.in
+    ;;
+esac
+m4_changequote(,)
+
 mkdir objdir
 cd objdir
 CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" CXXFLAGS="$OPT_FLAGS" \
@@ -82,6 +94,9 @@ cd objdir
 
 
 %changelog
+* Tue Nov 02 2020 Jonathan Wakely <jwakely@redhat.com> - 11.0.0-1.1
+- Adjust OPT_FLAGS consistently with gcc.spec in Fedora 33
+
 * Tue Jul 28 2020 Jonathan Wakely <jwakely@redhat.com> - 11.0.0-1
 - Exclude shared libraries from autodep processing
 
