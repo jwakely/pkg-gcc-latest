@@ -1,5 +1,5 @@
 #!/bin/sh
-# Start a COPR build for a GCC snapshot
+# Start a COPR build for a GCC snapshot, or build a .deb in a container.
 
 usage()
 {
@@ -86,17 +86,22 @@ gen_deb()
 }
 
 case $2 in
-  spec | srpm | rpm)
+  spec | srpm | rpm | all)
     gen_spec
     ;;&
-  srpm | rpm)
+  srpm | rpm | all)
     build_srpm
     ;;&
-  rpm)
+  rpm | all)
     build_copr
-    ;;
-  deb)
+    ;;&
+  deb | all)
     gen_deb
+    ;;&
+  all)
+    git checkout gh-pages
+    make update
+    git checkout master
     ;;
   *)
     echo "$0: Unknown build target: $2" >&2
