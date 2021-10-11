@@ -94,7 +94,7 @@ cd objdir
 
 
 %changelog
-* Tue Nov 02 2020 Jonathan Wakely <jwakely@redhat.com> - 11.0.0-1.1
+* Mon Nov 02 2020 Jonathan Wakely <jwakely@redhat.com> - 11.0.0-1.1
 - Adjust OPT_FLAGS consistently with gcc.spec in Fedora 33
 
 * Tue Jul 28 2020 Jonathan Wakely <jwakely@redhat.com> - 11.0.0-1
