@@ -30,6 +30,7 @@ BuildRequires:	glibc-devel >= 2.17
 BuildRequires:	gmp-devel >= 4.1.2-8, mpfr-devel >= 2.2.1, libmpc-devel >= 0.8.1
 BuildRequires:	elfutils-devel >= 0.147
 BuildRequires:	elfutils-libelf-devel >= 0.147
+BuildRequires:  chrpath
 %else
 BuildRequires:	gmp-devel >= 4.1.2-8, mpfr-devel >= 2.2.1, mpc-devel >= 0.8.1
 BuildRequires:	libdw-devel >= 0.147
@@ -86,6 +87,12 @@ make %{?_smp_mflags}
 %install
 cd objdir
 %make_install
+for i in $RPM_BUILD_ROOT/%{install_prefix}/lib64/lib*san.so.*
+do
+  test -f "$i" || continue
+  chrpath -l "$i" | grep -q -F %{install_prefix}/lib/../lib64 || continue
+  chrpath -c -r '$ORIGIN' "$i"
+done
 
 
 %files
@@ -94,6 +101,9 @@ cd objdir
 
 
 %changelog
+* Tue Nov 02 2021 Jonathan Wakely <jwakely@redhat.com> - 12.0.0-1
+- Remove '..' components in runpaths
+
 * Mon Nov 02 2020 Jonathan Wakely <jwakely@redhat.com> - 11.0.0-1.1
 - Adjust OPT_FLAGS consistently with gcc.spec in Fedora 33
 
