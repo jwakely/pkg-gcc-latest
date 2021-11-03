@@ -103,6 +103,8 @@ case $2 in
     make update
     git checkout master
     ;;
+  spec | srpm | rpm | deb)
+    ;;
   *)
     echo "$0: Unknown build target: $2" >&2
     exit 1
