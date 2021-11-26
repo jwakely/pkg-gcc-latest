@@ -4,13 +4,10 @@
 # or any files in the application's data directory for provides
 %global __provides_exclude_from ^%{install_prefix}/%{_lib}/
 # Do not generate auto-requires for symlinks to libs in this package.
-%global __requires_exclude ^lib(c[cp]1plugin|lto_plugin|atomic|cc1|gomp|itm|quadmath|(a|l|t|ub)san).so.?\\(\\)\\(.*\\)$
+%global __requires_exclude ^lib(c[cp]1plugin|lto_plugin|atomic|cc1|gomp|itm|quadmath|(a|l|t|ub)san)\\.so(\\.[[:digit:]]+)*\\(\\)\\(.*\\)$
 
 # Hardening slows the compiler way too much.
 %undefine _hardened_build
-# Until annobin is fixed (#1519165).
-%undefine _annotated_build
-%undefine _missing_build_ids_terminate_build
 
 Name:		gcc-latest
 Version:	VERSION
@@ -101,6 +98,10 @@ done
 
 
 %changelog
+* Fri Nov 26 2021 Jonathan Wakely <jwakely@redhat.com> - 12.0.0-2
+- Fix regex for __requires_exclude
+- Reenable annobin
+
 * Tue Nov 02 2021 Jonathan Wakely <jwakely@redhat.com> - 12.0.0-1
 - Remove '..' components in runpaths
 

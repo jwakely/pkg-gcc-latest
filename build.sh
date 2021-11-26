@@ -43,7 +43,7 @@ fetch_tarfile()
 gen_spec()
 {
   echo '### Generating RPM spec file'
-  m4 -P -DVERSION=$BASE_VER -DPKGREL=1 -DSNAPINFO=${DATE}git${REV} -DSOURCE_URL=https://gcc.gnu.org/pub/gcc/snapshots/${basename#gcc-}/$tarfile -DBASENAME=$basename gcc-latest.spec.m4 > gcc-latest.spec
+  m4 -P -DVERSION=$BASE_VER -DPKGREL=2 -DSNAPINFO=${DATE}git${REV} -DSOURCE_URL=https://gcc.gnu.org/pub/gcc/snapshots/${basename#gcc-}/$tarfile -DBASENAME=$basename gcc-latest.spec.m4 > gcc-latest.spec
 }
 
 build_srpm()
