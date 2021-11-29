@@ -8,6 +8,9 @@
 
 # Hardening slows the compiler way too much.
 %undefine _hardened_build
+# Annobin plugin can't be found while configuring libgcc
+%undefine _annotated_build
+%undefine _missing_build_ids_terminate_build
 
 Name:		gcc-latest
 Version:	VERSION
@@ -98,6 +101,9 @@ done
 
 
 %changelog
+* Mon Nov 29 2021 Jonathan Wakely <jwakely@redhat.com> - 12.0.0-2
+- Disable annobin
+
 * Fri Nov 26 2021 Jonathan Wakely <jwakely@redhat.com> - 12.0.0-2
 - Fix regex for __requires_exclude
 - Reenable annobin
