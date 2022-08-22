@@ -76,6 +76,7 @@ cd objdir
 CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" CXXFLAGS="$OPT_FLAGS" \
   ../configure --prefix=%{install_prefix} --enable-languages=c,c++ \
   --enable-libstdcxx-debug \
+  --enable-libstdcxx-backtrace \
   --disable-bootstrap --disable-multilib \
   --disable-libvtv --disable-libssp --disable-libffi \
   --with-system-zlib --without-isl \
