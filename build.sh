@@ -73,7 +73,10 @@ gen_deb()
   PKGNAME=gcc-latest_$BASE_VER-${DATE}git${REV}
   mkdir context
   ln $tarfile context/$tarfile
-  m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}git${REV}  control.m4 > context/control
+  m4 -P -DVERSION=$BASE_VER -DSNAPINFO=${DATE}git${REV} control.m4 > context/control
+  m4 -P -DVERSION=$BASE_VER postinst.m4 > context/postinst
+  m4 -P -DVERSION=$BASE_VER postrm.m4 > context/postrm
+  chmod 0755 context/postinst context/postrm
   m4 -P -DPKGNAME=$PKGNAME -DTARFILE=$tarfile -DBASENAME=$basename Containerfile.m4 > context/Containerfile
   echo '### Initializing container'
   podman build -t image context
