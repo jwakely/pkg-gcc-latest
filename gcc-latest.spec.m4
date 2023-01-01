@@ -4,7 +4,7 @@
 # or any files in the application's data directory for provides
 %global __provides_exclude_from ^%{install_prefix}/%{_lib}/
 # Do not generate auto-requires for symlinks to libs in this package.
-%global __requires_exclude ^lib(c[cp]1plugin|lto_plugin|atomic|cc1|gomp|itm|quadmath|(a|l|t|ub)san)\\.so(\\.[[:digit:]]+)*\\(\\)\\(.*\\)$
+%global __requires_exclude ^lib(c[cp]1plugin|lto_plugin|atomic|cc1|gomp|itm|quadmath|(hwa|a|l|t|ub)san)\\.so(\\.[[:digit:]]+)*\\(\\)\\(.*\\)$
 
 # Hardening slows the compiler way too much.
 %undefine _hardened_build
