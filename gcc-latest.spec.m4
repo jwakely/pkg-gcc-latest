@@ -6,6 +6,10 @@
 # Do not generate auto-requires for symlinks to libs in this package.
 %global __requires_exclude ^lib(c[cp]1plugin|lto_plugin|atomic|cc1|gomp|itm|quadmath|(a|hwa|l|t|ub)san)\\.so(\\.[[:digit:]]+)*\\(\\)\\(.*\\)$
 
+# Omit frame pointers.
+# https://fedoraproject.org/wiki/Changes/fno-omit-frame-pointer
+%undefine _include_frame_pointers
+
 # Hardening slows the compiler way too much.
 %undefine _hardened_build
 # Annobin plugin can't be found while configuring libgcc
