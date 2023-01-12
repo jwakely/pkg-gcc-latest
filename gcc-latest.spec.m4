@@ -84,6 +84,18 @@ CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" CXXFLAGS="$OPT_FLAGS" \
   --disable-bootstrap --disable-multilib \
   --disable-libvtv --disable-libssp --disable-libffi \
   --with-system-zlib --without-isl \
+%ifarch ppc64le
+  --enable-secureplt \
+  --with-long-double-128 --with-long-double-format=ieee \
+%if 0%{?rhel} == 9
+  --with-cpu-64=power9 --with-tune-64=power9 \
+%else
+  --with-cpu-64=power8 --with-tune-64=power8 \
+%endif
+%endif
+%ifarch x86_64 && 0%{?rhel} > 8
+  --with-arch_64=x86-64-v2 \
+%endif
   --with-bugurl=https://gcc.gnu.org/bugzilla
 
 make %{?_smp_mflags}
@@ -106,6 +118,10 @@ done
 
 
 %changelog
+* Thu Jan 12 2023 Jonathan Wakely <jwakely@redhat.com> - 13.0.0-3
+- Disable frame pointers
+- Copy cpu and long-double=ieee flags from Fedora gcc.spec
+
 * Mon Nov 29 2021 Jonathan Wakely <jwakely@redhat.com> - 12.0.0-2
 - Disable annobin
 
