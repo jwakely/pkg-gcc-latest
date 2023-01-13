@@ -87,6 +87,7 @@ CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" CXXFLAGS="$OPT_FLAGS" \
 %ifarch ppc64le
   --enable-secureplt \
   --with-long-double-128 --with-long-double-format=ieee \
+  --enable-checking=release \
 %if 0%{?rhel} == 9
   --with-cpu-64=power9 --with-tune-64=power9 \
 %else
