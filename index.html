@@ -120,22 +120,47 @@ in the <code>install</code> phase.</p>
 
 <p>A simple <code>.travis.yml</code> file using this package might look like:</p>
 
-<pre><code>    language: cpp
-    os: linux
-    dist: xenial
+<blockquote><pre><code>language: cpp
+os: linux
+dist: xenial
 
-    install:
-    - |
-      wget https://kayari.org/gcc-latest/gcc-latest.deb \
-      &amp;&amp; sudo dpkg -i gcc-latest.deb
-      export PATH=/opt/gcc-latest/bin:$PATH
-      export LD_RUN_PATH=/opt/gcc-latest/lib64
+install:
+- |
+  wget https://kayari.org/gcc-latest/gcc-latest.deb \
+  &amp;&amp; sudo dpkg -i gcc-latest.deb
+  export PATH=/opt/gcc-latest/bin:$PATH
+  export LD_RUN_PATH=/opt/gcc-latest/lib64
 
-    script:
-    - |
-      ./configure
-      make
-      make check
-</code></pre>
+script:
+- |
+  ./configure
+  make
+  make check
+</code></pre></blockquote>
+
+<h2 id="container">Using a container</h2>
+
+<p>
+To try the build out in a container you can use a <tt>Containerfile</tt>
+or <tt>Dockerfile</tt> like this:
+</p>
+
+<blockquote><pre><code>FROM fedora:latest
+RUN dnf -y install 'dnf-command(copr)'
+RUN dnf -y copr enable jwakely/gcc-latest
+RUN dnf -y install gcc-latest
+RUN /opt/gcc-latest/bin/g++ --version
+</code></pre></blockquote>
+
+<p>Or if you prefer Ubuntu:</p>
+
+<blockquote><pre><code>FROM ubuntu:latest
+RUN apt-get update -y
+RUN apt-get install -y build-essential wget
+RUN wget --quiet https://kayari.org/gcc-latest/gcc-latest.deb
+RUN dpkg -i gcc-latest.deb
+RUN /opt/gcc-latest/bin/g++ --version
+<code></pre></blockquote>
+
 </body>
 </html>
