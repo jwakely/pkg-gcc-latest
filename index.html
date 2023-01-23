@@ -52,7 +52,7 @@ or make your own builds of GCC and support them yourself.</p>
 will not know how to find the <code>libstdc++.so.6</code> shared library by default.
 This can result in errors complaining about <code>GLIBCXX_3.4.26</code> not being found.
 This is because these packages install libraries to <code>/opt/gcc-latest/lib64</code>
-and <a href="https://man7.org/linux/man-pages/man8/ld.so.8.html"><code>ld.so</code></a>
+and <a href="http://man7.org/linux/man-pages/man8/ld.so.8.html"><code>ld.so</code></a>
 doesn&rsquo;t search in that directory by default.
 This can be solved by using <code>LD_RUN_PATH</code> or <code>-Wl,-rpath</code> (when linking),
 or <code>LD_LIBRARY_PATH</code> (when running the executables),
@@ -88,15 +88,15 @@ are built and hosted in the
 (because large binaries can&rsquo;t be stored in a GitHub repo):</p>
 
 <ul>
-<li><a href="https://kayari.org/gcc-latest/gcc-latest_13.0.0-20230115git05cd79c2420d.deb">gcc-latest_13.0.0-20230115git05cd79c2420d.deb</a></li>
+<li><a href="http://kayari.org/gcc-latest/gcc-latest_13.0.0-20230115git05cd79c2420d.deb">gcc-latest_13.0.0-20230115git05cd79c2420d.deb</a></li>
 </ul>
 
 
-<p>The unversioned URL <a href="https://kayari.org/gcc-latest/gcc-latest.deb">https://kayari.org/gcc-latest/gcc-latest.deb</a>
+<p>The unversioned URL <a href="http://kayari.org/gcc-latest/gcc-latest.deb">http://kayari.org/gcc-latest/gcc-latest.deb</a>
 can be used in scripts and will redirect to the latest <code>.deb</code> file.
 To download from the unversioned URL but use the real filename use:</p>
 
-<pre><code>  wget --content-disposition https://kayari.org/gcc-latest/gcc-latest.deb
+<pre><code>  wget --content-disposition http://kayari.org/gcc-latest/gcc-latest.deb
 </code></pre>
 
 <h2>Source code</h2>
@@ -120,47 +120,22 @@ in the <code>install</code> phase.</p>
 
 <p>A simple <code>.travis.yml</code> file using this package might look like:</p>
 
-<blockquote><pre><code>language: cpp
-os: linux
-dist: xenial
+<pre><code>    language: cpp
+    os: linux
+    dist: xenial
 
-install:
-- |
-  wget https://kayari.org/gcc-latest/gcc-latest.deb \
-  &amp;&amp; sudo dpkg -i gcc-latest.deb
-  export PATH=/opt/gcc-latest/bin:$PATH
-  export LD_RUN_PATH=/opt/gcc-latest/lib64
+    install:
+    - |
+      wget http://kayari.org/gcc-latest/gcc-latest.deb \
+      &amp;&amp; sudo dpkg -i gcc-latest.deb
+      export PATH=/opt/gcc-latest/bin:$PATH
+      export LD_RUN_PATH=/opt/gcc-latest/lib64
 
-script:
-- |
-  ./configure
-  make
-  make check
-</code></pre></blockquote>
-
-<h2 id="container">Using a container</h2>
-
-<p>
-To try the build out in a container you can use a <tt>Containerfile</tt>
-or <tt>Dockerfile</tt> like this:
-</p>
-
-<blockquote><pre><code>FROM fedora:latest
-RUN dnf -y install 'dnf-command(copr)'
-RUN dnf -y copr enable jwakely/gcc-latest
-RUN dnf -y install gcc-latest
-RUN /opt/gcc-latest/bin/g++ --version
-</code></pre></blockquote>
-
-<p>Or if you prefer Ubuntu:</p>
-
-<blockquote><pre><code>FROM ubuntu:latest
-RUN apt-get update -y
-RUN apt-get install -y build-essential wget
-RUN wget --quiet https://kayari.org/gcc-latest/gcc-latest.deb
-RUN dpkg -i gcc-latest.deb
-RUN /opt/gcc-latest/bin/g++ --version
-<code></pre></blockquote>
-
+    script:
+    - |
+      ./configure
+      make
+      make check
+</code></pre>
 </body>
 </html>
