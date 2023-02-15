@@ -46,7 +46,7 @@ You need to be aware that binaries created by this snapshot compiler
 will not know how to find the `libstdc++.so.6` shared library by default.
 This can result in errors complaining about `GLIBCXX_3.4.26` not being found.
 This is because these packages install libraries to `/opt/gcc-latest/lib64`
-and [`ld.so`](http://man7.org/linux/man-pages/man8/ld.so.8.html)
+and [`ld.so`](https://man7.org/linux/man-pages/man8/ld.so.8.html)
 doesn't search in that directory by default.
 This can be solved by using `LD_RUN_PATH` or `-Wl,-rpath` (when linking),
 or `LD_LIBRARY_PATH` (when running the executables),
@@ -80,13 +80,13 @@ are built and hosted in the
 A `.deb` package for **Ubuntu 16.04** is hosted on my personal site
 (because large binaries can't be stored in a GitHub repo):
 
-- [DEB](http://kayari.org/gcc-latest/DEB)
+- [DEB](https://kayari.org/gcc-latest/DEB)
 
-The unversioned URL [http://kayari.org/gcc-latest/gcc-latest.deb](http://kayari.org/gcc-latest/gcc-latest.deb)
+The unversioned URL [https://kayari.org/gcc-latest/gcc-latest.deb](https://kayari.org/gcc-latest/gcc-latest.deb)
 can be used in scripts and will redirect to the latest `.deb` file.
 To download from the unversioned URL but use the real filename use:
 
-      wget --content-disposition http://kayari.org/gcc-latest/gcc-latest.deb
+      wget --content-disposition https://kayari.org/gcc-latest/gcc-latest.deb
 
 ## Source code
 
@@ -98,8 +98,8 @@ The script to create these packages
 is on [GitHub](https://github.com/jwakely/pkg-gcc-latest)
 (along with any patches applied to the upstream sources).
 
-## Travis CI integration
 <a id="travis">
+## Travis CI integration
 
 To use these packages with
 [Travis CI on GitHub](https://docs.travis-ci.com/user/tutorial/)
@@ -114,7 +114,7 @@ A simple `.travis.yml` file using this package might look like:
 
         install:
         - |
-          wget http://kayari.org/gcc-latest/gcc-latest.deb \
+          wget https://kayari.org/gcc-latest/gcc-latest.deb \
           && sudo dpkg -i gcc-latest.deb
           export PATH=/opt/gcc-latest/bin:$PATH
           export LD_RUN_PATH=/opt/gcc-latest/lib64
@@ -124,4 +124,25 @@ A simple `.travis.yml` file using this package might look like:
           ./configure
           make
           make check
+
+<a id="container">
+## Using a container
+
+To try the build out in a container you can use a `Containerfile`>
+or `Dockerfile</tt> like this:
+
+        FROM fedora:latest
+        RUN dnf -y install 'dnf-command(copr)'
+        RUN dnf -y copr enable jwakely/gcc-latest
+        RUN dnf -y install gcc-latest
+        RUN /opt/gcc-latest/bin/g++ --version
+
+Or if you prefer Ubuntu:
+
+        FROM ubuntu:latest
+        RUN apt-get update -y
+        RUN apt-get install -y build-essential wget
+        RUN wget --quiet https://kayari.org/gcc-latest/gcc-latest.deb
+        RUN dpkg -i gcc-latest.deb
+        RUN /opt/gcc-latest/bin/g++ --version
 
