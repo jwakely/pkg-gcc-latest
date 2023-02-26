@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Start a COPR build for a GCC snapshot, or build a .deb in a container.
 
 usage()
