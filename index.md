@@ -128,8 +128,8 @@ A simple `.travis.yml` file using this package might look like:
 <a id="container">
 ## Using a container
 
-To try the build out in a container you can use a `Containerfile`>
-or `Dockerfile</tt> like this:
+To try the build out in a container you can use a `Containerfile`
+or `Dockerfile` like this:
 
         FROM fedora:latest
         RUN dnf -y install 'dnf-command(copr)'

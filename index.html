@@ -142,11 +142,11 @@ in the <code>install</code> phase.</p>
 
 <h2>Using a container</h2>
 
-<p>To try the build out in a container you can use a <code>Containerfile</code>>
-or Dockerfile</tt> like this:</p>
+<p>To try the build out in a container you can use a <code>Containerfile</code>
+or <code>Dockerfile</code> like this:</p>
 
 <pre><code>    FROM fedora:latest
-    RUN dnf -y install dnf-command(copr)'
+    RUN dnf -y install 'dnf-command(copr)'
     RUN dnf -y copr enable jwakely/gcc-latest
     RUN dnf -y install gcc-latest
     RUN /opt/gcc-latest/bin/g++ --version
