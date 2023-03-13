@@ -129,7 +129,7 @@ A simple `.travis.yml` file using this package might look like:
 ## Using a container
 
 To try the build out in a container you can use a `Containerfile`
-or `Dockerfile` like this:
+or `Dockerfile` like [this](containers/fedora/Containerfile):
 
         FROM fedora:latest
         RUN dnf -y install 'dnf-command(copr)'
@@ -137,7 +137,7 @@ or `Dockerfile` like this:
         RUN dnf -y install gcc-latest
         RUN /opt/gcc-latest/bin/g++ --version
 
-Or if you prefer Ubuntu:
+Or if you prefer Ubuntu, like [this](containers/ubuntu/Containerfile):
 
         FROM ubuntu:latest
         RUN apt-get update -y

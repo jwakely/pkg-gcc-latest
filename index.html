@@ -143,7 +143,7 @@ in the <code>install</code> phase.</p>
 <h2>Using a container</h2>
 
 <p>To try the build out in a container you can use a <code>Containerfile</code>
-or <code>Dockerfile</code> like this:</p>
+or <code>Dockerfile</code> like <a href="containers/fedora/Containerfile">this</a>:</p>
 
 <pre><code>    FROM fedora:latest
     RUN dnf -y install 'dnf-command(copr)'
@@ -152,7 +152,7 @@ or <code>Dockerfile</code> like this:</p>
     RUN /opt/gcc-latest/bin/g++ --version
 </code></pre>
 
-<p>Or if you prefer Ubuntu:</p>
+<p>Or if you prefer Ubuntu, like <a href="containers/ubuntu/Containerfile">this</a>:</p>
 
 <pre><code>    FROM ubuntu:latest
     RUN apt-get update -y
