@@ -29,7 +29,7 @@ fetch_tarfile()
 {
   w3m -dump $url/index.html > index.txt
   cat index.txt
-  REV=`awk '/master revision/ { getline ; print substr($1, 1, 12) }' index.txt`
+  REV=`awk '/branch .* revision/ { getline ; print substr($1, 1, 12) }' index.txt`
   tarfile=`awk '/^gcc-.*tar/ { print $1 }' index.txt`
   if ! test -f $tarfile
   then
