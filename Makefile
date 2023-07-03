@@ -1,4 +1,4 @@
-BASE_VER := 13.0.1
+BASE_VER := 14.0.0
 
 MAJOR := $(basename $(basename $(BASE_VER)))
 DEB := gcc-latest_$(BASE_VER)-$(DATE)git$(GITREV).deb
