@@ -4,7 +4,7 @@
 # or any files in the application's data directory for provides
 %global __provides_exclude_from ^%{install_prefix}/%{_lib}/
 # Do not generate auto-requires for symlinks to libs in this package.
-%global __requires_exclude ^lib(c[cp]1plugin|lto_plugin|atomic|cc1|gomp|itm|quadmath|(a|hwa|l|t|ub)san)\\.so(\\.[[:digit:]]+)*\\(\\)\\(.*\\)$
+%global __requires_exclude ^lib(c[cp]1plugin|lto_plugin|atomic|cc1|gomp|itm|stdc\\+\\+|quadmath|(a|hwa|l|t|ub)san)\\.so(\\.[[:digit:]]+)*\\(.*\\)\\(.*\\)$
 
 # Omit frame pointers.
 # https://fedoraproject.org/wiki/Changes/fno-omit-frame-pointer
@@ -121,6 +121,9 @@ done
 
 
 %changelog
+* Thu Oct 12 2023 Andrew Potter <agpotter@gmail.com> - 14.0.0-4
+- Exclude requires for libstdc++
+
 * Thu Jan 12 2023 Jonathan Wakely <jwakely@redhat.com> - 13.0.0-3
 - Disable frame pointers
 - Copy cpu and long-double=ieee flags from Fedora gcc.spec
