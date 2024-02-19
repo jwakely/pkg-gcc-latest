@@ -48,6 +48,12 @@ gen_spec()
 
 build_srpm()
 {
+  echo '### Checking for updates to mock configs'
+  if ! sudo dnf --quiet check-update mock-core-configs
+  then
+    echo 'Update and retry'
+    exit 1
+  fi
   echo '### Building SRPM'
   local chroot=fedora-rawhide-x86_64
   mock -r $chroot --buildsrpm --spec gcc-latest.spec --sources .
