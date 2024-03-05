@@ -1,0 +1,24 @@
+name: CI using gcc-latest
+
+on:
+  push:
+    branches: [ gh-pages ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: install-gcc
+      run: |
+          wget --quiet https://kayari.org/gcc-latest/gcc-latest.deb \
+          && sudo dpkg -i gcc-latest.deb
+          echo "/opt/gcc-latest/bin" >> $GITHUB_PATH
+          echo "LD_RUN_PATH=/opt/gcc-latest/lib64" >> $GITHUB_ENV
+    - name: check-path
+      run: gcc -v 2>&1 | grep -F /opt/gcc-latest
+    - name: check-lib-path
+      run: sh -c 'echo $LD_RUN_PATH' | grep -F /opt/gcc-latest/lib64
+
