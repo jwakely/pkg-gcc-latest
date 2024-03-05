@@ -108,22 +108,33 @@ in the `install` phase.
 
 A simple `.travis.yml` file using this package might look like:
 
-        language: cpp
-        os: linux
-        dist: xenial
+        name: CI using gcc-latest
 
-        install:
-        - |
-          wget https://kayari.org/gcc-latest/gcc-latest.deb \
-          && sudo dpkg -i gcc-latest.deb
-          export PATH=/opt/gcc-latest/bin:$PATH
-          export LD_RUN_PATH=/opt/gcc-latest/lib64
+        on:
+          push:
+            branches: [ $default-branch ]
+          pull_request:
+            branches: [ $default-branch ]
 
-        script:
-        - |
-          ./configure
-          make
-          make check
+        jobs:
+          build:
+
+            runs-on: ubuntu-latest
+
+            steps:
+            - uses: actions/checkout@v3
+            - name: install-gcc
+              run: |
+                  wget --quiet https://kayari.org/gcc-latest/gcc-latest.deb \
+                  && sudo dpkg -i gcc-latest.deb
+                  echo "/opt/gcc-latest/bin" >> $GITHUB_PATH
+                  echo "LD_RUN_PATH=/opt/gcc-latest/lib64" >> $GITHUB_ENV
+            - name: configure
+              run: ./configure
+            - name: make
+              run: make
+            - name: make check
+              run: make check
 
 <a id="container">
 ## Using a container
