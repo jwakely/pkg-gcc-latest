@@ -107,7 +107,7 @@ case $2 in
   deb | all)
     gen_deb
     ;;&
-  all)
+  upload | all)
     git checkout gh-pages
     make update
     git checkout master
