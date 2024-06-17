@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: install-gcc
       run: |
           wget --quiet https://kayari.org/gcc-latest/gcc-latest.deb \
