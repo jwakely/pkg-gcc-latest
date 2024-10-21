@@ -114,6 +114,13 @@ case $2 in
     ;;
   spec | srpm | rpm | deb)
     ;;
+  info)
+    echo tarfile=$tarfile
+    echo basename=$basename
+    echo BASE_VER=$BASE_VER
+    echo DATE=$DATE
+    echo REV=$REV
+    ;;
   *)
     echo "$0: Unknown build target: $2" >&2
     exit 1
