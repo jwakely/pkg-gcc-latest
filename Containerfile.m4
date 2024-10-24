@@ -1,6 +1,6 @@
 FROM ubuntu:16.04
 RUN apt-get update
-RUN apt-get -y install build-essential curl file flex bison libz-dev
+RUN apt-get -y install build-essential curl file flex bison libz-dev perl
 COPY TARFILE /tmp
 RUN tar -xf /tmp/TARFILE -C /tmp
 RUN mkdir -p -m 0755 /tmp/PKGNAME/DEBIAN

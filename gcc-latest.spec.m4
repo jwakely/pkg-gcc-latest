@@ -40,6 +40,7 @@ BuildRequires:	gmp-devel >= 4.1.2-8, mpfr-devel >= 2.2.1, mpc-devel >= 0.8.1
 BuildRequires:	libdw-devel >= 0.147
 BuildRequires:	libelf-devel >= 0.147
 %endif
+BuildRequires:	perl
 Requires:	binutils >= 2.24
 Requires:	glibc >= 2.17
 
@@ -121,6 +122,9 @@ done
 
 
 %changelog
+* Thu Oct 24 2024 Jonathan Wakely <jwakely@redhat.com> - 15.0.0-5
+- Add BuildRequires: perl to fix man page generation
+
 * Thu Oct 12 2023 Andrew Potter <agpotter@gmail.com> - 14.0.0-4
 - Exclude requires for libstdc++
 
