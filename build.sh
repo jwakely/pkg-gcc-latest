@@ -3,7 +3,7 @@
 
 usage()
 {
-  echo "Usage: $0 <snapshot> <spec|srpm|rpm|deb>"
+  echo "Usage: $0 <snapshot> <spec|srpm|rpm|deb|all|upload>"
   echo 'The snapshot argument should be a version and date (e.g. 9-20190310)'
   echo 'or a symbolic name (e.g. LATEST-9).'
 }
