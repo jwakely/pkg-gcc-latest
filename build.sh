@@ -83,7 +83,8 @@ gen_deb()
   m4 -P -DVERSION=$BASE_VER postinst.m4 > context/postinst
   m4 -P -DVERSION=$BASE_VER postrm.m4 > context/postrm
   chmod 0755 context/postinst context/postrm
-  m4 -P -DPKGNAME=$PKGNAME -DTARFILE=$tarfile -DBASENAME=$basename Containerfile.m4 > context/Containerfile
+  nprocs=$(getconf _NPROCESSORS_ONLN)
+  m4 -P -DPKGNAME=$PKGNAME -DTARFILE=$tarfile -DBASENAME=$basename -DNPROCS=${nprocs:-4} Containerfile.m4 > context/Containerfile
   echo '### Initializing container'
   podman build -t image context
   podman create --name cont image

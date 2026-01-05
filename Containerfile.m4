@@ -8,7 +8,7 @@ COPY control postinst postrm /tmp/PKGNAME/DEBIAN
 RUN cd /tmp/BASENAME && ./contrib/download_prerequisites --no-isl
 RUN mkdir -p /tmp/BASENAME/objdir
 RUN cd /tmp/BASENAME/objdir && ../configure --prefix=/opt/gcc-latest --enable-languages=c,c++ --enable-libstdcxx-debug --enable-libstdcxx-backtrace --disable-bootstrap --disable-multilib --disable-libvtv --with-system-zlib --without-isl --enable-multiarch
-RUN make -C /tmp/BASENAME/objdir -j8
+RUN make -C /tmp/BASENAME/objdir -j NPROCS
 RUN make -C /tmp/BASENAME/objdir install DESTDIR=/tmp/PKGNAME
 RUN cd /tmp && dpkg-deb --build PKGNAME
 RUN apt-get -y install /tmp/PKGNAME.deb
