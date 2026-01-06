@@ -81,7 +81,6 @@ cd objdir
 CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" CXXFLAGS="$OPT_FLAGS" \
   ../configure --prefix=%{install_prefix} --enable-languages=c,c++ \
   --enable-libstdcxx-debug \
-  --enable-libstdcxx-backtrace \
   --disable-bootstrap --disable-multilib \
   --disable-libvtv --disable-libssp --disable-libffi \
   --with-system-zlib --without-isl \
@@ -122,6 +121,9 @@ done
 
 
 %changelog
+* Tue Jan 06 2026 Jonathan Wakely <jwakely@fedoraproject.org> - 16.0.0-6
+- Remove --enable-libstdcxx-backtrace
+
 * Thu Oct 24 2024 Jonathan Wakely <jwakely@redhat.com> - 15.0.0-5
 - Add BuildRequires: perl to fix man page generation
 
