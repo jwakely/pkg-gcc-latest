@@ -1,7 +1,7 @@
 # Binary packages for GCC snapshots
 
 changequote(`[[[',`]]]')dnl
-<img src="https://gcc.gnu.org/img/gccegg-65.png" alt="GCC logo" style="float:right; margin-left:10px"/>
+<img src="https://gcc.gnu.org/img/gccegg-65.png" alt="GCC logo" style="float:right; margin-left:10px">
 
 This page links to binary packages for some popular GNU/Linux distributions,
 built from recent [snapshots](https://gcc.gnu.org/snapshots.html)
@@ -98,7 +98,7 @@ The script to create these packages
 is on [GitHub](https://github.com/jwakely/pkg-gcc-latest)
 (along with any patches applied to the upstream sources).
 
-<a id="travis">
+<a id="travis"/>
 ## Travis CI integration
 
 To use these packages with
