@@ -98,7 +98,7 @@ The script to create these packages
 is on [GitHub](https://github.com/jwakely/pkg-gcc-latest)
 (along with any patches applied to the upstream sources).
 
-<a id="travis"/>
+<a id="travis"></a>
 ## Travis CI integration
 
 To use these packages with
