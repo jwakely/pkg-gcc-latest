@@ -136,7 +136,7 @@ A simple `.travis.yml` file using this package might look like:
             - name: make check
               run: make check
 
-<a id="container">
+<a id="container"></a>
 ## Using a container
 
 To try the build out in a container you can use a `Containerfile`
