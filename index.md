@@ -77,7 +77,7 @@ RPM packages for **Fedora, RHEL, CentOS, and openSUSE**
 are built and hosted in the
 [jwakely/gcc-latest COPR](https://copr.fedorainfracloud.org/coprs/jwakely/gcc-latest/).
 
-A `.deb` package for **Ubuntu 16.04** is hosted on my personal site
+A `.deb` package for **Ubuntu 18.04** is hosted on my personal site
 (because large binaries can't be stored in a GitHub repo):
 
 - [DEB](https://kayari.org/gcc-latest/DEB)
