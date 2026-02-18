@@ -81,6 +81,7 @@ cd objdir
 CC="$CC" CXX="$CXX" CFLAGS="$OPT_FLAGS" CXXFLAGS="$OPT_FLAGS" \
   ../configure --prefix=%{install_prefix} --enable-languages=c,c++ \
   --enable-libstdcxx-debug \
+  --disable-libstdcxx-pch \
   --disable-bootstrap --disable-multilib \
   --disable-libvtv --disable-libssp --disable-libffi \
   --with-system-zlib --without-isl \
@@ -121,6 +122,9 @@ done
 
 
 %changelog
+* Wed Feb 18 2026 Jonathan Wakely <jwakely@fedoraproject.org> - 16.0.1-7
+- Disable libstdc++ PCH during build
+
 * Tue Jan 06 2026 Jonathan Wakely <jwakely@fedoraproject.org> - 16.0.0-6
 - Remove --enable-libstdcxx-backtrace
 
