@@ -93,6 +93,8 @@ To download from the unversioned URL but use the real filename use:
 The GCC package maintainers build regular snapshots of GCC trunk for
 Fedora Rawhide, see [the announcement thread](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/thread/VHPYUVPYKT66JXBQAYX3OBDESS54VYPI/)
 and the [COPR projects](https://copr.fedorainfracloud.org/groups/g/gcc-team/coprs/).
+Those packages are only built for Rawhide, but include the Fortran compiler
+and are built for more architectures than my `gcc-latest` packages.
 
 ## Source code
 
