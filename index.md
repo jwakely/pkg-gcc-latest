@@ -88,6 +88,12 @@ To download from the unversioned URL but use the real filename use:
 
       wget --content-disposition https://kayari.org/gcc-latest/gcc-latest.deb
 
+### Fedora Rawhide packages
+
+The GCC package maintainers build regular snapshots of GCC trunk for
+Fedora Rawhide, see [the announcement thread](https://lists.fedoraproject.org/archives/list/devel@lists.fedoraproject.org/thread/VHPYUVPYKT66JXBQAYX3OBDESS54VYPI/)
+and the [COPR projects](https://copr.fedorainfracloud.org/groups/g/gcc-team/coprs/).
+
 ## Source code
 
 The sources for these packages can be found in the Git repository
