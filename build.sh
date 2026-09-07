@@ -21,12 +21,13 @@ fi
 
 set -e
 
-echo "### Fetching information for GCC $1 snapshot"
+cd $(dirname "$0")
 
 url=https://gcc.gnu.org/pub/gcc/snapshots/$1
 
 fetch_tarfile()
 {
+  echo "### Fetching information for GCC $1 snapshot"
   w3m -dump $url/index.html > index.txt
   cat index.txt
   REV=`awk '/branch .* revision/ { getline ; print substr($1, 1, 12) }' index.txt`
